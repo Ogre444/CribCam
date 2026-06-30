@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Virtuális környezet / telepítő melléktermék
+venv/
+.venv/
+.req-stamp
+
+# Felhasználói beállítások és titkok (sosem kerülhet a repóba)
+.cribcam/
+config.json
+*.key
+.env
+
+# Build artefaktumok
+build/
+dist/
+*.spec
+
+# OS / szerkesztő
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Nem a programhoz tartozó média
+*.mp4
+*.zip
