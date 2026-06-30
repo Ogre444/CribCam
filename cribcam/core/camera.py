@@ -13,23 +13,37 @@ class Camera:
         self._lock = threading.Lock()
 
     def open(self) -> bool:
+        with self._lock:
+            return self._open_locked()
+
+    def _open_locked(self) -> bool:
+        if self._cap is not None:
+            self._cap.release()
         self._cap = cv2.VideoCapture(self._index)
         return self._cap.isOpened()
 
+    def reopen(self) -> bool:
+        """Zárás + újranyitás — hosszú futás közbeni kamera-elvesztés kezelésére."""
+        return self.open()
+
     def capture(self) -> Optional[Image.Image]:
-        if not self._cap or not self._cap.isOpened():
-            return None
         with self._lock:
+            if self._cap is None or not self._cap.isOpened():
+                return None
             ret, frame = self._cap.read()
-        if not ret:
-            return None
+            if not ret:
+                # a kamera elérhetetlenné vált — zárjuk, hogy a hívó újranyithassa
+                self._cap.release()
+                self._cap = None
+                return None
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         return Image.fromarray(rgb)
 
     def close(self) -> None:
-        if self._cap:
-            self._cap.release()
-            self._cap = None
+        with self._lock:
+            if self._cap is not None:
+                self._cap.release()
+                self._cap = None
 
     @property
     def is_open(self) -> bool:
