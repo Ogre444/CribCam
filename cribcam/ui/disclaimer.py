@@ -3,6 +3,8 @@
 import sys
 import webbrowser
 import customtkinter as ctk
+from pathlib import Path
+from PIL import Image
 
 _RICK = "https://youtu.be/dQw4w9WgXcQ?list=RDdQw4w9WgXcQ"
 
@@ -70,8 +72,16 @@ class DisclaimerWindow(ctk.CTk):
         self.title(s["window_title"])
         self.columnconfigure(0, weight=1)
 
+        # CribCam logó az ablak tetején
+        logo_path = Path(__file__).parent.parent.parent / "logo" / "nincshatter.png"
+        if logo_path.exists():
+            pil = Image.open(logo_path)
+            self._logo_img = ctk.CTkImage(light_image=pil, dark_image=pil, size=(120, 120))
+            ctk.CTkLabel(self, image=self._logo_img, text="").grid(
+                row=0, column=0, pady=(16, 4))
+
         header = ctk.CTkFrame(self, fg_color="#1C1C1E", corner_radius=0)
-        header.grid(row=0, column=0, sticky="ew")
+        header.grid(row=1, column=0, sticky="ew")
         header.columnconfigure(0, weight=1)
 
         ctk.CTkLabel(
@@ -94,7 +104,7 @@ class DisclaimerWindow(ctk.CTk):
 
         text_frame = ctk.CTkFrame(self, fg_color="#161616", corner_radius=10,
                                   border_width=1, border_color="#2C2C2E")
-        text_frame.grid(row=1, column=0, padx=16, pady=12, sticky="ew")
+        text_frame.grid(row=2, column=0, padx=16, pady=12, sticky="ew")
 
         ctk.CTkLabel(
             text_frame,
@@ -106,7 +116,7 @@ class DisclaimerWindow(ctk.CTk):
         ).pack(padx=16, pady=14)
 
         btn_frame = ctk.CTkFrame(self, fg_color="transparent")
-        btn_frame.grid(row=2, column=0, padx=16, pady=(0, 16), sticky="ew")
+        btn_frame.grid(row=3, column=0, padx=16, pady=(0, 16), sticky="ew")
         btn_frame.columnconfigure(0, weight=1)
         btn_frame.columnconfigure(1, weight=1)
 

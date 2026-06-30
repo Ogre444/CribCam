@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="../logo/nincshatter.png" alt="CRIBCam logo" width="140">
+</p>
+
 # CRIBCam — Installation
 
 One **self-contained installer script** per platform. Each downloads the program from
