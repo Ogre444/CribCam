@@ -2,11 +2,23 @@
   <img src="logo/nincshatter.png" alt="CRIBCam logo" width="300">
 </p>
 
-<h1 align="center">CRIBCam</h1>
+<h1 align="center">CRIBCam v1.3</h1>
 
 <p align="center">
   A camera-based AI answer assistant. It periodically analyzes the webcam image with a
   vision model and shows the answer to a multiple-choice question in a floating popup.
+</p>
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/in-action.png" alt="CRIBCam in action — the answer popup over a quiz" width="760">
+</p>
+
+<p align="center">
+  <img src="docs/main-window.png" alt="Main window" width="270">
+  &nbsp;&nbsp;
+  <img src="docs/settings.png" alt="Settings" width="270">
 </p>
 
 > **Disclaimer:** CRIBCam is intended solely for informational and personal educational
